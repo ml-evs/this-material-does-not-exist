@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import dash
 import httpx
 import uuid
@@ -70,6 +71,11 @@ layout = html.Div(
                             href="https://github.com/ml-evs/this-material-does-not-exist",
                             style={"padding": "20px"},
                         ),
+                        html.A(
+                            "inspired by",
+                            href="https://thispersondoesnotexist.com/",
+                            style={"padding": "20px"},
+                        ),
                     ],
                 ),
             ]
@@ -97,8 +103,10 @@ shuffled_entries = random.sample(range(0, 384938), 1000)
     Input(structure_component.id(), "data"),
 )
 def get_structure(value: str, n_clicks: int, data: dict):
+
+    results_fname = os.environ.get("RESULTS_PATH", "results.csv")
     if data:
-        with open("results.csv", "a") as f:
+        with open(results_fname, "a") as f:
             f.write(f'{session_id},{data["properties"]["optimade_id"].split()[1]},{value}\n')
 
     ind = shuffled_entries[n_clicks]
