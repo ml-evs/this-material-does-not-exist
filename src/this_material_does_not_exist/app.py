@@ -15,6 +15,7 @@ from pymatgen.core import Lattice, Structure
 
 app = dash.Dash(
     assets_folder=str(SETTINGS.ASSETS_PATH),
+    title="This Material Does Not Exist?",
 )
 
 server = app.server
