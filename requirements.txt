@@ -1,7 +1,4 @@
-fastapi
-jinja2
-jinja2-fragments
-pytailwindcss
 httpx
 crystal-toolkit
 optimade[pymatgen]
+gunicorn
