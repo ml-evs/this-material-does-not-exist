@@ -108,6 +108,7 @@ ctc.register_crystal_toolkit(app, layout=layout)
 
 # random string per user session
 session_id = str(uuid.uuid4())
+random.seed(1)
 shuffled_entries = random.sample(range(0, 384938), 1000)
 
 
@@ -127,7 +128,7 @@ def get_structure(value: str, n_clicks: int, data: dict):
                 f'{session_id},{data["properties"]["optimade_id"].split()[1]},{value}\n'
             )
 
-    ind = shuffled_entries[n_clicks]
+    ind = random.choice(shuffled_entries)
     base_url = "https://optimade-gnome.odbx.science/v1/structures"
     response = httpx.get(f"{base_url}?page_limit=1&page_offset={ind}").json()
     optimade_structure = response["data"][0]
