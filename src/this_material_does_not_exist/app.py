@@ -11,28 +11,20 @@ from crystal_toolkit.settings import SETTINGS
 from dash import html
 from dash.dependencies import Input, Output, State
 from optimade.adapters.structures import Structure as OptimadeStructure
-from pymatgen.core import Lattice, Structure
 
 app = dash.Dash(
     assets_folder=str(SETTINGS.ASSETS_PATH),
     title="This Material Does Not Exist?",
 )
 
+# Required for gunicorn deployment via app:server
 server = app.server
 
 
-# create the Structure object
 structure = None
-Structure(
-    lattice=Lattice.cubic(4.2),
-    species=["H", "O"],
-    coords=[[0, 0, 0], [0.5, 0.5, 0.5]],
-)
 
-# create the Crystal Toolkit component
 structure_component = ctc.StructureMoleculeComponent(structure, id="my_structure")
 
-# example layout to demonstrate capabilities of component
 layout = html.Div(
     [
         html.H2("Does this material exist?"),
