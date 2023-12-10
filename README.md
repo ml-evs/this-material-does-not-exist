@@ -1,7 +1,6 @@
-# [thismaterialdoesnotexist.com](thismaterialdoesnotexist.com)
+<h1 align="center">💎 <a href="thismaterialdoesnotexist.com">this-material-does-not-exist</a> 💎</h1>
 
-Get a random structure suggested by recent ML materials discovery
-projects, and vote on whether you think it should be synthesizable (or, at least, whether it is worth trying!)
+Get given random crystal structures predicted by ML materials discovery projects, and vote on whether you think it should be synthesizable (or, at least, whether it is worth trying!)
 
 Currently uses [crystaltoolkit](https://docs.crystaltoolkit.org) and data from the
 [OPTIMADE API](https://optimade.org) for the recent [Google DeepMind
