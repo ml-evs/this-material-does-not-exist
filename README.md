@@ -1,4 +1,4 @@
-# thismaterialdoesnotexist.com
+# [thismaterialdoesnotexist.com](thismaterialdoesnotexist.com)
 
 Get a random structure suggested by recent ML materials discovery
 projects, and vote on whether you think it should be synthesizable (or, at least, whether it is worth trying!)
