@@ -146,7 +146,7 @@ def get_structure(n_clicks: int, value: str, comment: str, data: dict):
     if data:
         with open(results_fname, "a") as f:
             f.write(
-                f'{session_id},{data["properties"]["optimade_id"].split()[1]},{value},{comment}\n'
+                f'{session_id},{data["properties"]["optimade_id"].split()[1]},{value},"{comment}"\n'
             )
 
     ind = random.choice(shuffled_entries)
