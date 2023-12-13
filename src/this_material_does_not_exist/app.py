@@ -42,11 +42,34 @@ layout = html.Div(
                     marks={0: "0%", 50: "50%", 100: "100%"},
                     id="slider",
                 ),
-                html.Button(
-                    "Submit", id="submit", n_clicks=0, style={"margin": "10px"}
+                html.Label("Why? (Optional):"),
+                dash.dcc.Textarea(
+                    id="comment-box",
+                    value="",
+                    style={
+                        "width": "100%",
+                        "height": "50px",
+                        "resize": "vertical",
+                        "padding": "5px",
+                        "font-size": "15px",
+                        "border": "1px solid #ccc",
+                        "border-radius": "5px",
+                    },
                 ),
-                html.P(
-                    "Scores will be recorded anonymously and shared publicly if they prove interesting!"
+                html.Button(
+                    "Submit",
+                    id="submit",
+                    n_clicks=0,
+                    style={
+                        "margin": "10px",
+                        "padding": "15px 20px",
+                        "font-size": "16px",
+                        "background-color": "#333",
+                        "color": "white",
+                        "border": "none",
+                        "border-radius": "5px",
+                        "cursor": "pointer",
+                    },
                 ),
             ],
             style={
@@ -58,6 +81,10 @@ layout = html.Div(
         ),
         html.Footer(
             [
+                html.P(
+                    "Scores will be recorded anonymously and shared publicly if they prove interesting!",
+                    style={"text-align": "center"},
+                ),
                 html.Div(
                     [
                         html.A(
@@ -108,16 +135,18 @@ shuffled_entries = random.sample(range(0, 384938), 1000)
     Output(structure_component.id(), "data"),
     Output("link", "href"),
     Output("link", "children"),
+    Output("comment-box", "value"),
     Input("submit", "n_clicks"),
     State("slider", "value"),
+    State("comment-box", "value"),
     Input(structure_component.id(), "data"),
 )
-def get_structure(value: str, n_clicks: int, data: dict):
+def get_structure(n_clicks: int, value: str, comment: str, data: dict):
     results_fname = os.environ.get("RESULTS_PATH", "results.csv")
     if data:
         with open(results_fname, "a") as f:
             f.write(
-                f'{session_id},{data["properties"]["optimade_id"].split()[1]},{value}\n'
+                f'{session_id},{data["properties"]["optimade_id"].split()[1]},{value},"{comment}"\n'
             )
 
     ind = random.choice(shuffled_entries)
@@ -128,4 +157,4 @@ def get_structure(value: str, n_clicks: int, data: dict):
     optimade_id = "GNome " + optimade_structure["id"].split("/")[-1].split(".")[0]
     optimade_url = base_url + "/" + optimade_structure["id"]
     pmg_structure.properties["optimade_id"] = optimade_id
-    return pmg_structure, optimade_url, optimade_id
+    return pmg_structure, optimade_url, optimade_id, ""
