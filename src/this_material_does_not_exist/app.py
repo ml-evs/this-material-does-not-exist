@@ -1,6 +1,7 @@
 from __future__ import annotations
-
+import datetime
 import os
+from flask import request
 import random
 import uuid
 
@@ -143,10 +144,11 @@ shuffled_entries = random.sample(range(0, 384938), 1000)
 )
 def get_structure(n_clicks: int, value: str, comment: str, data: dict):
     results_fname = os.environ.get("RESULTS_PATH", "results.csv")
+    timestamp = datetime.datetime.now().isoformat()
     if data:
         with open(results_fname, "a") as f:
             f.write(
-                f'{session_id},{data["properties"]["optimade_id"].split()[1]},{value},"{comment}"\n'
+                f'{timestamp},{request.remote_addr},{data["properties"]["optimade_id"].split()[1]},{value},{n_clicks},{comment!r}\n'
             )
 
     ind = random.choice(shuffled_entries)
