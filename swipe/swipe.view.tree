@@ -1,0 +1,29 @@
+$optimade_tmdne_swipe $mol_view
+	plugins /
+		<= Touch $mol_touch
+			allow_draw false
+			allow_pan <= allowed true
+			pan? => pan?
+	speed_threshold 1
+	right_threshold <= threshold 60
+	left_threshold <= threshold
+	swipe_distance 300
+	transition_smooth \left 0.5s
+	passed \
+	swiped_to? \
+	swipe_to_right null
+	swipe_to_left null
+	move_to_middle null
+	x? 0
+	sub /
+		<= Float $mol_view
+			sub <= content /
+			style *
+				left <= left \0px
+				transition <= transition? \
+	
+	pointer_holding? false
+	event *
+		^
+		pointerdown? <=> pointerdown? null
+		pointerup? <=> pointerup? null

@@ -1,0 +1,23 @@
+$optimade_tmdne_card $optimade_tmdne_swipe
+	allowed <= loaded false
+	content /
+		<= Card_float $mol_view
+			attr *
+				loaded <= loaded
+			sub / <= Card_content $mol_view
+				attr *
+					card_position <= card_position \
+				sub /
+					<= Name $mol_html_view
+						minimal_height 22
+						html <= name \
+					<= Question $mol_paragraph
+						title \Do you think it's synthesizable?
+					<= Why_label $mol_view
+						sub /
+							<= Why_title $mol_paragraph
+								title \Why?
+							<= Why_optional $mol_paragraph
+								title \(optional)
+					<= Why $mol_textarea
+						value? <=> why? \

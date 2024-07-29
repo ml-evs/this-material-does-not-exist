@@ -1,4 +1,0 @@
-httpx
-crystal-toolkit
-optimade[pymatgen]
-gunicorn

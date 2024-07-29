@@ -1,0 +1,92 @@
+$optimade_tmdne_app $mol_view
+	title \This Material Does Not Exist?
+	number? 1
+	plugins /
+		<= Theme $mol_theme_auto
+	rotating? false
+	number_swiped? 0
+	number_prefetch? 0
+	sub /
+		<= Player $optimade_cifplayer_player
+			fullscreen? => player_fullscreen?
+			attr *
+				fullscreen <= player_fullscreen?
+				optimade_tmdne_app_player_hidden <= card_holding
+			data <= json null
+			Fullscreen null
+			Overlays null
+			event *
+				pointerdown? <=> player_pointerdown? null
+				pointerup? <=> player_pointerup? null
+		<= Head_space $mol_view
+			sub /
+				<= Head_card $mol_list
+					sub /
+						<= Head_title $mol_paragraph
+							title \Does this material exist?
+		<= Prediction $mol_list
+			attr *
+				optimade_tmdne_app_prediction_hidden <= rotating
+			sub <= params /
+				<= Param* $mol_view
+					sub /
+						<= Param_name* $mol_paragraph
+							title <= param_name* \
+						<= Param_symbol* $mol_html_view
+							minimal_height <= param_min_height 22
+							html <= param_symbol* \
+						\=
+						<= Param_value* $mol_view
+							sub /
+								<= param_value* \
+								<= Param_unit* $mol_html_view
+									minimal_height <= param_min_height
+									html <= param_unit* \
+								<= Param_mae* $mol_view
+									sub /
+										\(±
+										<= param_mae* \
+										<= Param_mae_unit* $mol_html_view
+											minimal_height <= param_min_height
+											html <= param_unit* \
+										\)
+		<= Foot $mol_view
+			attr *
+				optimade_tmdne_app_foot_hidden <= rotating
+			sub /
+				<= Hint_no $mol_button_minor
+					title \ᐊ No
+					click? <=> click_no? null
+				<= Hint_yes $mol_button_minor
+					title \Yes ᐅ
+					click? <=> click_yes? null
+				^ cards / <= Card* $optimade_tmdne_card
+					name <= card_name* \
+					loaded <= card_loaded* false
+					why? <=> why*? \
+					pointer_holding? <=> card_holding? false
+					swiped_to? <=> swiped_to*? \
+					swipe_to_right => swipe_to_right*
+					swipe_to_left => swipe_to_left*
+		<= Acks $mol_view
+			sub /
+				<= Acks_a $mol_link
+					uri \https://www.optimade.org
+					sub /
+						\Powered by Optimade
+				<= Acks_b $mol_link
+					uri \https://github.com/tilde-lab/cifplayer
+					sub /
+						\and cifplayer
+				<= Acks_c $mol_link
+					uri \https://github.com/google-deepmind/materials_discovery
+					sub /
+						\using the GNome dataset
+				<= Acks_d $mol_link
+					uri \https://github.com/ml-evs/this-material-does-not-exist
+					sub /
+						\developed on GitHub
+				<= Acks_e $mol_link
+					uri \https://thispersondoesnotexist.com
+					sub /
+						\and inspired by...

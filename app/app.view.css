@@ -1,0 +1,8 @@
+@media all and (max-width: 850px) {
+	[optimade_tmdne_app_param_mae], [optimade_tmdne_app_param_name] { display: none; }
+	[optimade_tmdne_app_acks] { display: none; }
+}
+
+@media all and (max-height: 650px) {
+	[optimade_tmdne_app_prediction] { display: none; }
+}
